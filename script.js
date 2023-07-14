@@ -78,8 +78,16 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
-
 displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+  // console.log(balance);
+  labelBalance.textContent = `£${balance}`;
+};
+calcDisplayBalance(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -88,8 +96,7 @@ const createUsernames = function (accs) {
       .split(" ")
       .map((word) => word.charAt(0))
       .join("");
+    // console.log(acc.username);
   });
 };
-
 createUsernames(accounts);
-console.log(account1);

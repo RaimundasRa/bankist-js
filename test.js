@@ -41,4 +41,30 @@ const movementsDescriptions = movements.map(
     )}`
 );
 
-console.log(movementsDescriptions);
+// console.log(movementsDescriptions);
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+// console.log(deposits);
+
+const wihdrawals = movements.filter(function (mov) {
+  return mov < 0;
+});
+
+// console.log(wihdrawals);
+
+const balance = movements.reduce(function (accumilator, movement) {
+  return accumilator + movement;
+}, 0);
+
+// console.log(balance);
+
+// Maximum value
+
+const max = movements.reduce(function (acc, mov) {
+  return acc > mov ? acc : mov;
+}, movements[0]);
+
+console.log(max);
