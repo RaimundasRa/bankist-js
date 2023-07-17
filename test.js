@@ -23,6 +23,23 @@ const checkDogs = function (dataJulia, dataKate) {
 
 // checkDogs(dataJulia, dataKate);
 
+const calcAverageHumanAge = function (ages) {
+  const humanAges = ages.map(function (age) {
+    return age <= 2 ? 2 * age : 16 + age * 4;
+  });
+  const adultDogs = humanAges.filter(function (adult) {
+    return adult >= 18;
+  });
+  const avarageAge = adultDogs.reduce(function (acc, age) {
+    return acc + age / adultDogs.length;
+  }, 0);
+  console.log(humanAges);
+  console.log(adultDogs);
+  console.log(avarageAge);
+};
+
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
 /////////////////////
 /////////////////////
 
@@ -67,4 +84,4 @@ const max = movements.reduce(function (acc, mov) {
   return acc > mov ? acc : mov;
 }, movements[0]);
 
-console.log(max);
+// console.log(max);
