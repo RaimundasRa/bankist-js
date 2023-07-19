@@ -124,3 +124,30 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
+
+// Event handler
+let currentAccount;
+
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and welcome message
+    labelWelcome.textContent = `Welcome back ${currentAccount.owner.split(
+      " "[0]
+    )}`;
+    containerApp.style.opacity = 100;
+
+    // Display movements
+
+    // Display balance
+
+    // Display summary
+    console.log("Login");
+  }
+});

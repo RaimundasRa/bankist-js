@@ -129,7 +129,7 @@ const accounts = [account1, account2, account3, account4];
 const account = accounts.find((acc) => acc.owner === "Jessica Davis");
 // console.log(account);
 
-let acca = {};
+let acca;
 for (const acc of accounts) {
   if (acc.owner === "Jessica Davis") {
     acca = acc;
