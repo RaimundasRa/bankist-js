@@ -86,7 +86,9 @@ const displayMovements = function (movements, sort = false) {
       index + 1
     } ${type}</div>
       <div class="movements__value">${
-        type === "deposit" ? "£" + movement : "-£" + Math.abs(movement)
+        type === "deposit"
+          ? "£" + movement.toFixed(2)
+          : "-£" + Math.abs(movement).toFixed(2)
       }</div>
     </div>
     `;
@@ -100,19 +102,19 @@ const calcDisplayBalance = function (acc) {
     return acc + mov;
   }, 0);
   // console.log(balance);
-  labelBalance.textContent = `£${acc.balance}`;
+  labelBalance.textContent = `£${acc.balance.toFixed(2)}`;
 };
 
 const calcDisplaySummary = function (account) {
   const incomes = account.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `£${incomes}`;
+  labelSumIn.textContent = `£${incomes.toFixed(2)}`;
 
   const out = account.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `£${Math.abs(out)}`;
+  labelSumOut.textContent = `£${Math.abs(out.toFixed(2))}`;
 
   const interest = account.movements
     .filter((mov) => mov > 0)
@@ -121,7 +123,7 @@ const calcDisplaySummary = function (account) {
       return int >= 1;
     })
     .reduce((acc, interest) => acc + interest, 0);
-  labelSumInterest.textContent = `£${interest}`;
+  labelSumInterest.textContent = `£${interest.toFixed(2)}`;
 };
 
 // Create user names and store them in the account objects
@@ -200,7 +202,7 @@ btnTransfer.addEventListener("click", function (e) {
 
 btnLoan.addEventListener("click", function (e) {
   e.preventDefault();
-  const amount = Number(inputLoanAmount.value);
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (
     amount > 0 &&
