@@ -141,30 +141,26 @@ const calcDisplaySummary = function (account) {
   const incomes = account.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = formatCur(
-    account.balance,
-    account.locale,
-    account.currency
-  );
+
+  labelSumIn.textContent = formatCur(incomes, account.locale, account.currency);
 
   const out = account.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = labelSumIn.textContent = formatCur(
-    account.balance,
-    account.locale,
-    account.currency
-  );
+
+  labelSumOut.textContent = formatCur(out, account.locale, account.currency);
 
   const interest = account.movements
     .filter((mov) => mov > 0)
     .map((deposit) => (deposit * account.interestRate) / 100)
     .filter((int, i, arr) => {
+      // console.log(arr);
       return int >= 1;
     })
     .reduce((acc, interest) => acc + interest, 0);
+
   labelSumInterest.textContent = formatCur(
-    account.balance,
+    interest,
     account.locale,
     account.currency
   );
@@ -217,6 +213,7 @@ const startLogOutTimer = function () {
 };
 
 // Event handler
+// Global variables
 let currentAccount, timer;
 
 // FAKE ALWAYS LOGGED IN
